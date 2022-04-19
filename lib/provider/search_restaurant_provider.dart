@@ -32,6 +32,7 @@ class SearchRestaurantProvider extends ChangeNotifier {
       if (restaurant.restaurants.isEmpty) {
         _state = ResultState.noData;
         notifyListeners();
+        return _message = 'Data restaurant tidak ditemukan';
       } else {
         _state = ResultState.hasData;
         notifyListeners();

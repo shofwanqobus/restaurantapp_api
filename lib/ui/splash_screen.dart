@@ -16,7 +16,7 @@ class _SplashScreen extends State<SplashScreen> {
     super.initState();
     Timer(
       const Duration(
-        seconds: 10,
+        seconds: 3,
       ),
       () => Navigator.pushReplacement(
         context,
@@ -35,7 +35,7 @@ class _SplashScreen extends State<SplashScreen> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(top: 250),
-            child: Image.asset('images/restaurant1.webp'),
+            child: Image.asset('images/restaurant1.png'),
           ),
           Container(
             padding: const EdgeInsets.all(4.0),

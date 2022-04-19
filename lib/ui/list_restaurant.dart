@@ -17,6 +17,23 @@ class RestaurantList extends StatelessWidget {
             children: <Widget>[
               Container(
                 alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.only(top: 32.0, left: 24.0),
+                child: Text(
+                  'Restfood',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ),
+              Container(
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.only(top: 4.0, left: 24.0),
+                child: Text(
+                  'Recommendation restaurant for you!',
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+              ),
+              Container(
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.only(top: 16),
                 child: Consumer<RestaurantProvider>(
                   builder: (context, state, _) {
                     if (state.state == ResultState.loading) {
@@ -63,13 +80,6 @@ class RestaurantList extends StatelessWidget {
 
   Widget _buildAndroid(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Restaurant App',
-          style: Theme.of(context).textTheme.headline5,
-        ),
-      ),
       body: _buildList(context),
     );
   }

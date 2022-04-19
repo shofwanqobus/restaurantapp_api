@@ -7,6 +7,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurantapp_api/data/api/api_service.dart';
 import 'package:restaurantapp_api/data/db/database_helper.dart';
+import 'package:restaurantapp_api/data/model/detail_restaurant_model.dart';
 import 'package:restaurantapp_api/data/model/restaurant.dart';
 import 'package:restaurantapp_api/data/preferences/preferences_helper.dart';
 import 'package:restaurantapp_api/design/navigation.dart';
@@ -53,9 +54,11 @@ class MainApp extends StatelessWidget {
             apiService: RestaurantApiService(),
           ),
         ),
-        ChangeNotifierProvider(
-          create: (_) => SchedulingProvider(),
-        ),
+        ChangeNotifierProvider<SchedulingProvider>(
+            create: (_) => SchedulingProvider(
+                    preferencesHelper: PreferencesHelper(
+                  sharedPreferences: SharedPreferences.getInstance(),
+                ))),
         ChangeNotifierProvider(
           create: (_) => PreferencesProvider(
             preferencesHelper: PreferencesHelper(
@@ -90,7 +93,7 @@ class MainApp extends StatelessWidget {
           routes: {
             SplashScreen.routeName: (context) => SplashScreen(),
             DetailRestaurant.routeName: (context) => DetailRestaurant(
-                restaurantItems: ModalRoute.of(context)!.settings.arguments!
+                restaurantItems: ModalRoute.of(context)?.settings.arguments
                     as RestaurantItems),
             SearchPage.routeName: (context) => SearchPage(),
             FavoritesPage.routeName: (context) => FavoritesPage(),

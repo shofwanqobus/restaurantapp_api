@@ -24,7 +24,7 @@ class DetailRestaurant extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<DetailRestaurantProvider>(
           create: (_) => DetailRestaurantProvider(
-              apiService: RestaurantApiService(), id: restaurantItems.id!),
+              apiService: RestaurantApiService(), id: restaurantItems.id),
         ),
         ChangeNotifierProvider<DatabaseProvider>(
           create: (_) => DatabaseProvider(
@@ -81,68 +81,64 @@ class DetailRestaurant extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Stack(
-              children: [
-                SafeArea(
-                  child: Hero(
-                    tag: state.result.restaurant.pictureId,
-                    child: Image.network(
-                        'https://restaurant-api.dicoding.dev/images/large/' +
-                            state.result.restaurant.pictureId),
-                  ),
+            Stack(children: [
+              SafeArea(
+                child: Hero(
+                  tag: state.result.restaurant.pictureId,
+                  child: Image.network(
+                      'https://restaurant-api.dicoding.dev/images/large/' +
+                          state.result.restaurant.pictureId),
                 ),
-                SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.white54,
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.arrow_back_ios_new,
-                              color: Colors.black,
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
+              ),
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.white54,
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.arrow_back_ios_new,
+                            color: Colors.black,
                           ),
-                        ),
-                        Consumer<DatabaseProvider>(
-                          builder: (context, provider, child) {
-                            return FutureBuilder<bool>(
-                              future: provider.isFavorited(restaurantItems.id!),
-                              builder: ((context, snapshot) {
-                                var isFavorited = snapshot.data ?? false;
-                                return CircleAvatar(
-                                  backgroundColor: Colors.white54,
-                                  child: isFavorited
-                                      ? IconButton(
-                                          icon: const Icon(Icons.favorite),
-                                          color: Colors.red,
-                                          onPressed: () =>
-                                              provider.removeFavorite(
-                                                  restaurantItems.id!),
-                                        )
-                                      : IconButton(
-                                          icon:
-                                              const Icon(Icons.favorite_border),
-                                          color: Colors.red,
-                                          onPressed: () => provider
-                                              .addFavorite(restaurantItems),
-                                        ),
-                                );
-                              }),
-                            );
+                          onPressed: () {
+                            Navigator.pop(context);
                           },
                         ),
-                      ],
-                    ),
+                      ),
+                      Consumer<DatabaseProvider>(
+                        builder: (context, provider, child) {
+                          return FutureBuilder<bool>(
+                            future: provider.isFavorited(restaurantItems.id),
+                            builder: ((context, snapshot) {
+                              var isFavorited = snapshot.data ?? false;
+                              return CircleAvatar(
+                                backgroundColor: Colors.white54,
+                                child: isFavorited
+                                    ? IconButton(
+                                        icon: const Icon(Icons.favorite),
+                                        color: Colors.red,
+                                        onPressed: () => provider
+                                            .removeFavorite(restaurantItems.id),
+                                      )
+                                    : IconButton(
+                                        icon: const Icon(Icons.favorite_border),
+                                        color: Colors.red,
+                                        onPressed: () => provider
+                                            .addFavorite(restaurantItems),
+                                      ),
+                              );
+                            }),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ]),
             Padding(
               padding: const EdgeInsets.all(25),
               child: Column(

@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurantapp_api/data/api/api_service.dart';
 import 'package:restaurantapp_api/data/db/database_helper.dart';
-import 'package:restaurantapp_api/data/model/detail_restaurant_model.dart';
+import 'package:restaurantapp_api/data/preferences/preferences_helper.dart';
 import 'package:restaurantapp_api/provider/database_provider.dart';
 import 'package:restaurantapp_api/provider/restaurant_provider.dart';
 import 'package:restaurantapp_api/provider/scheduling_provider.dart';
@@ -17,6 +17,7 @@ import 'package:restaurantapp_api/ui/search_restaurant.dart';
 import 'package:restaurantapp_api/ui/settings.dart';
 import 'package:restaurantapp_api/utilities/notification_helper.dart';
 import 'package:restaurantapp_api/widgets/platform_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Homepage extends StatefulWidget {
   static const routeName = '/homepage';
@@ -46,7 +47,10 @@ class _Homepage extends State<Homepage> {
       child: FavoritesPage(),
     ),
     ChangeNotifierProvider<SchedulingProvider>(
-      create: (_) => SchedulingProvider(),
+      create: (_) => SchedulingProvider(
+          preferencesHelper: PreferencesHelper(
+        sharedPreferences: SharedPreferences.getInstance(),
+      )),
       child: SettingPage(),
     ),
   ];
@@ -99,8 +103,10 @@ class _Homepage extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    _notificationHelper
-        .configureSelectNotificationSubject(DetailRestaurant.routeName);
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      _notificationHelper
+          .configureSelectNotificationSubject(DetailRestaurant.routeName);
+    });
   }
 
   @override

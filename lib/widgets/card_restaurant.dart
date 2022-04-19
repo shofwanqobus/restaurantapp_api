@@ -28,7 +28,7 @@ class CardRestaurant extends StatelessWidget {
             left: 2,
             bottom: 4,
           ),
-          child: Text(restaurantItems.name!),
+          child: Text(restaurantItems.name),
         ),
         subtitle: Container(
           padding: const EdgeInsets.only(bottom: 8),
@@ -42,7 +42,7 @@ class CardRestaurant extends StatelessWidget {
                       Icons.location_on,
                       size: 15,
                     ),
-                    Text(restaurantItems.city!),
+                    Text(restaurantItems.city),
                   ],
                 ),
               ),

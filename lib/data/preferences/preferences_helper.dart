@@ -6,7 +6,7 @@ class PreferencesHelper {
   PreferencesHelper({required this.sharedPreferences});
 
   static const darkTheme = 'DARK_THEME';
-  static const dailyRestaurant = 'DAILY_RESTAURANT';
+  static const dailyRestaurant = 'SCHEDULLING_RESTAURANT';
 
   Future<bool> get isDarkTheme async {
     final prefs = await sharedPreferences;

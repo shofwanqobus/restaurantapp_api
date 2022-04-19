@@ -79,7 +79,7 @@ class FavoritesPage extends StatelessWidget {
     return Consumer<DatabaseProvider>(
       builder: (context, provider, child) {
         return FutureBuilder<bool>(
-          future: provider.isFavorited(restaurantItems.id!),
+          future: provider.isFavorited(restaurantItems.id),
           builder: (context, snapshot) {
             return Material(
               child: ListTile(
@@ -99,7 +99,7 @@ class FavoritesPage extends StatelessWidget {
                     left: 2,
                     bottom: 4,
                   ),
-                  child: Text(restaurantItems.name!),
+                  child: Text(restaurantItems.name),
                 ),
                 subtitle: Container(
                   padding: const EdgeInsets.only(bottom: 8),
@@ -113,7 +113,7 @@ class FavoritesPage extends StatelessWidget {
                               Icons.location_on,
                               size: 15,
                             ),
-                            Text(restaurantItems.city!),
+                            Text(restaurantItems.city),
                           ],
                         ),
                       ),

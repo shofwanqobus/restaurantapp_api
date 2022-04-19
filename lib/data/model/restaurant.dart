@@ -34,12 +34,12 @@ class Restaurant {
 }
 
 class RestaurantItems {
-  String? id;
-  String? name;
-  String? description;
+  String id;
+  String name;
+  String description;
   String pictureId;
-  String? city;
-  double? rating;
+  String city;
+  double rating;
 
   RestaurantItems({
     required this.id,

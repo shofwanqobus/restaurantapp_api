@@ -37,7 +37,7 @@ class SettingPage extends StatelessWidget {
 
   Widget _buildList(BuildContext context) {
     return Consumer<PreferencesProvider>(
-      builder: (context, provider, chilld) {
+      builder: (context, provider, child) {
         return ListView(
           children: [
             Material(
@@ -62,8 +62,8 @@ class SettingPage extends StatelessWidget {
                         if (Platform.isIOS) {
                           customDialog(context);
                         } else {
+                          scheduled.enableDailyRestaurants(value);
                           scheduled.scheduledRestaurants(value);
-                          provider.enableDailyRestaurants(value);
                         }
                       },
                     );

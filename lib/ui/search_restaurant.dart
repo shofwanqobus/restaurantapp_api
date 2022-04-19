@@ -28,7 +28,6 @@ class _SearchPage extends State<SearchPage> {
         } else if (state.state == ResultState.hasData) {
           return ListView.builder(
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
             itemCount: state.result.restaurants.length,
             itemBuilder: (context, index) {
               var resto = state.result.restaurants;
@@ -143,7 +142,7 @@ class _SearchPage extends State<SearchPage> {
             left: 2,
             bottom: 4,
           ),
-          child: Text(restaurantItems.name!),
+          child: Text(restaurantItems.name),
         ),
         subtitle: Container(
           padding: const EdgeInsets.only(bottom: 8),
@@ -154,7 +153,7 @@ class _SearchPage extends State<SearchPage> {
                 child: Row(
                   children: [
                     const Icon(Icons.location_on, size: 15),
-                    Text(restaurantItems.city!),
+                    Text(restaurantItems.city),
                   ],
                 ),
               ),
